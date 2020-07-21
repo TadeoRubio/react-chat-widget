@@ -27,6 +27,7 @@ type Props = {
   showTimeStamp?: boolean;
   imagePreview?: boolean;
   zoomStep?: number;
+  name?: string;
   handleSubmit?: AnyFunction;
 } & typeof defaultProps;
 
@@ -50,6 +51,7 @@ function ConnectedWidget({
   showTimeStamp,
   imagePreview,
   zoomStep,
+  name,
   handleSubmit
 }: Props) {
   return (
@@ -74,6 +76,7 @@ function ConnectedWidget({
         showTimeStamp={showTimeStamp}
         imagePreview={imagePreview}
         zoomStep={zoomStep}
+        name={name}
         handleSubmit={handleSubmit}
       />
     </Provider>
@@ -94,6 +97,7 @@ const defaultProps = {
   showTimeStamp: true,
   imagePreview: false,
   zoomStep: 80,
+  name: "chatwidget"
 };
 ConnectedWidget.defaultProps = defaultProps;
 

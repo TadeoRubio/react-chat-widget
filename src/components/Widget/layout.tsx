@@ -33,6 +33,7 @@ type Props = {
   showTimeStamp: boolean;
   imagePreview?: boolean;
   zoomStep?: number;
+  name?: string;
 }
 
 function WidgetLayout({
@@ -56,6 +57,7 @@ function WidgetLayout({
   showTimeStamp,
   imagePreview,
   zoomStep,
+  name,
 }: Props) {
   const dispatch = useDispatch();
   const { dissableInput, showChat, visible } = useSelector((state: GlobalState) => ({
@@ -105,6 +107,8 @@ function WidgetLayout({
   useEffect(() => {
     document.body.setAttribute('style', `overflow: ${visible || fullScreenMode ? 'hidden' : 'auto'}`)
   }, [fullScreenMode, visible])
+
+  console.log("-->>" +name + "<<--");
 
   return (
     <div

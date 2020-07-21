@@ -38,17 +38,30 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div id="tomakeitbetter">
         <button style={{position: 'absolute', right: 40, bottom: 150}}>test</button>
         <Widget
-          title="Bienvenido"
+          title="Hey Jude!"
           subtitle="Asistente virtual"
           senderPlaceHolder="Escribe aquí ..."
           handleNewUserMessage={this.handleNewUserMessage}
           handleQuickButtonClicked={this.handleQuickButtonClicked}
           imagePreview
           handleSubmit={this.handleSubmit}
+          name="OBLADI"
         />
+        
+        <Widget
+          title="Here comes the Sun!!"
+          subtitle="Asistente virtual"
+          senderPlaceHolder="Escribe aquí ..."
+          handleNewUserMessage={this.handleNewUserMessage}
+          handleQuickButtonClicked={this.handleQuickButtonClicked}
+          imagePreview
+          handleSubmit={this.handleSubmit}
+          name="OBLADA"
+        />
+        
       </div>
     );
   }
