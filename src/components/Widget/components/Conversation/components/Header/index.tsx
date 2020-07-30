@@ -10,11 +10,12 @@ type Props = {
   toggleChat: () => void;
   showCloseButton: boolean;
   titleAvatar?: string;
+  name: string;
 }
 
-function Header({ title, subtitle, toggleChat, showCloseButton, titleAvatar }: Props) {
+function Header({ title, subtitle, toggleChat, showCloseButton, titleAvatar, name }: Props) {
   return (
-    <div className="rcw-header">
+    <div className="rcw-header" id={name}>
       {showCloseButton &&
         <button className="rcw-close-button" onClick={toggleChat}>
           <img src={close} className="rcw-close" alt="close" />

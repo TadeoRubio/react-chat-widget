@@ -3,45 +3,51 @@ import { ElementType } from 'react';
 import * as actionsTypes from './types';
 import { LinkParams, ImageState } from '../types';
 
-export function toggleChat(): actionsTypes.ToggleChat {
+export function toggleChat(name: string): actionsTypes.ToggleChat {
   return {
-    type: actionsTypes.TOGGLE_CHAT
+    type: actionsTypes.TOGGLE_CHAT,
+    name
   };
 }
 
-export function toggleInputDisabled(): actionsTypes.ToggleInputDisabled {
+export function toggleInputDisabled(name: string): actionsTypes.ToggleInputDisabled {
   return {
-    type: actionsTypes.TOGGLE_INPUT_DISABLED
+    type: actionsTypes.TOGGLE_INPUT_DISABLED,
+    name
   };
 }
 
-export function addUserMessage(text: string, id?: string): actionsTypes.AddUserMessage {
+export function addUserMessage(text: string, name: string, id?: string): actionsTypes.AddUserMessage {
   return {
     type: actionsTypes.ADD_NEW_USER_MESSAGE,
     text,
+    name,
     id
   };
 }
 
-export function addResponseMessage(text: string, id?: string): actionsTypes.AddResponseMessage {
+export function addResponseMessage(text: string, name: string, id?: string): actionsTypes.AddResponseMessage {
   return {
     type: actionsTypes.ADD_NEW_RESPONSE_MESSAGE,
     text,
-    id
+    id,
+    name
   };
 }
 
-export function toggleMsgLoader(): actionsTypes.ToggleMsgLoader {
+export function toggleMsgLoader(name: string): actionsTypes.ToggleMsgLoader {
   return {
-    type: actionsTypes.TOGGLE_MESSAGE_LOADER
+    type: actionsTypes.TOGGLE_MESSAGE_LOADER,
+    name
   }
 }
 
-export function addLinkSnippet(link: LinkParams, id?: string): actionsTypes.AddLinkSnippet {
+export function addLinkSnippet(link: LinkParams, name: string, id?: string): actionsTypes.AddLinkSnippet {
   return {
     type: actionsTypes.ADD_NEW_LINK_SNIPPET,
     link,
-    id
+    id,
+    name
   };
 }
 
@@ -49,6 +55,7 @@ export function renderCustomComponent(
   component: ElementType,
   props: any,
   showAvatar: boolean,
+  name: string,
   id?: string
 ): actionsTypes.RenderCustomComponent {
   return {
@@ -56,60 +63,76 @@ export function renderCustomComponent(
     component,
     props,
     showAvatar,
-    id
+    id,
+    name
   };
 }
 
-export function dropMessages(): actionsTypes.DropMessages {
+export function dropMessages(name: string): actionsTypes.DropMessages {
   return {
-    type: actionsTypes.DROP_MESSAGES
+    type: actionsTypes.DROP_MESSAGES,
+    name
   };
 }
 
-export function hideAvatar(index: number): actionsTypes.HideAvatar {
+export function hideAvatar(index: number,name: string): actionsTypes.HideAvatar {
   return {
     type: actionsTypes.HIDE_AVATAR,
-    index
+    index,
+    name
   };
 }
 
-export function setQuickButtons(buttons: Array<{ label: string, value: string | number }>): actionsTypes.SetQuickButtons {
+export function setQuickButtons(buttons: Array<{ label: string, value: string | number }>, name: string ): actionsTypes.SetQuickButtons {
   return {
     type: actionsTypes.SET_QUICK_BUTTONS,
-    buttons
+    buttons,
+    name
   }
 }
 
-export function deleteMessages(count: number, id?: string): actionsTypes.DeleteMessages {
+export function deleteMessages(count: number, name: string, id?: string): actionsTypes.DeleteMessages {
   return {
     type: actionsTypes.DELETE_MESSAGES,
     count,
-    id
+    id,
+    name
   }
 }
 
-export function setBadgeCount(count: number): actionsTypes.SetBadgeCount {
+export function setBadgeCount(count: number,name: string): actionsTypes.SetBadgeCount {
   return {
     type: actionsTypes.SET_BADGE_COUNT,
-    count
+    count,
+    name
   }
 }
 
-export function markAllMessagesRead(): actionsTypes.MarkAllMessagesRead {
+export function markAllMessagesRead(name: string): actionsTypes.MarkAllMessagesRead {
   return {
-    type: actionsTypes.MARK_ALL_READ
+    type: actionsTypes.MARK_ALL_READ,
+    name
   }
 }
 
-export function openFullscreenPreview(payload: ImageState): actionsTypes.FullscreenPreviewActions {
+export function openFullscreenPreview(payload: ImageState, name: string): actionsTypes.FullscreenPreviewActions {
   return {
     type: actionsTypes.OPEN_FULLSCREEN_PREVIEW,
-    payload
+    payload,
+    name
   };
 }
 
-export function closeFullscreenPreview(): actionsTypes.FullscreenPreviewActions {
+export function closeFullscreenPreview(name: string): actionsTypes.FullscreenPreviewActions {
   return {
-    type: actionsTypes.CLOSE_FULLSCREEN_PREVIEW
+    type: actionsTypes.CLOSE_FULLSCREEN_PREVIEW,
+    name
+  };
+}
+
+export function addChat(name:string): actionsTypes.GlobalActions {
+  return{
+    type: actionsTypes.ADD_CHAT,
+    name
   };
 }

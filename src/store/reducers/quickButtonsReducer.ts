@@ -1,15 +1,20 @@
-import { createReducer } from '../../utils/createReducer';
 import { createQuickButton } from '../../utils/messages';
-import { SET_QUICK_BUTTONS, QuickButtonsActions } from '../actions/types';
-import { QuickButtonsState, QuickButton } from '../types'
-
-const initialState = {
-  quickButtons: []
-};
+import { SET_QUICK_BUTTONS } from '../actions/types';
+import { QuickButton, GlobalState } from '../types'
 
 const quickButtonsReducer = {
-  [SET_QUICK_BUTTONS]: (_: QuickButtonsState, { buttons }) =>
-    ({ quickButtons: [...buttons.map((button: QuickButton) => createQuickButton(button))] })
+  [SET_QUICK_BUTTONS]: (state: GlobalState, { buttons, name }) =>
+  ({
+   ...state,
+     chats:{
+       ...state.chats, [name]:{
+         ...state.chats[name], quickButtons: {
+           ...state.chats[name].quickButtons, quickButtons: [...buttons.map((button: QuickButton) => createQuickButton(button))]
+         } 
+       }
+     }
+  })
+
 }
 
-export default (state = initialState, action: QuickButtonsActions) => createReducer(quickButtonsReducer, state, action);
+export default quickButtonsReducer;

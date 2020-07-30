@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { toggleChat, addUserMessage } from '../../store/actions';
+import { toggleChat, addUserMessage, addChat } from '../../store/actions';
 import { AnyFunction } from '../../utils/types';
 
 import WidgetLayout from './layout';
@@ -26,7 +26,7 @@ type Props = {
   showTimeStamp: boolean;
   imagePreview?: boolean;
   zoomStep?: number;
-  name?: string;
+  name: string;
   handleSubmit?: AnyFunction;
 }
 
@@ -54,9 +54,9 @@ function Widget({
   handleSubmit
 }: Props) {
   const dispatch = useDispatch();
-
+  dispatch(addChat(name));
   const toggleConversation = () => {
-    dispatch(toggleChat());
+    dispatch(toggleChat(name));
   }
 
   const handleMessageSubmit = (event) => {
@@ -67,15 +67,15 @@ function Widget({
       return;      
     }
 
-    handleSubmit?.(userInput);
-    dispatch(addUserMessage(userInput));
-    handleNewUserMessage(userInput);
+    handleSubmit?.(userInput,name);
+    dispatch(addUserMessage(userInput,name));
+    handleNewUserMessage(userInput,name);
     event.target.message.value = '';
   }
 
   const onQuickButtonClicked = (event, value) => {
     event.preventDefault();
-    handleQuickButtonClicked?.(value)
+    handleQuickButtonClicked?.(value,name)
   }
 
   return (

@@ -33,7 +33,7 @@ type Props = {
   showTimeStamp: boolean;
   imagePreview?: boolean;
   zoomStep?: number;
-  name?: string;
+  name: string;
 }
 
 function WidgetLayout({
@@ -61,9 +61,9 @@ function WidgetLayout({
 }: Props) {
   const dispatch = useDispatch();
   const { dissableInput, showChat, visible } = useSelector((state: GlobalState) => ({
-    showChat: state.behavior.showChat,
-    dissableInput: state.behavior.disabledInput,
-    visible: state.preview.visible,
+      showChat: state.chats[name].behavior.showChat,
+      dissableInput: state.chats[name].behavior.disabledInput,
+      visible: state.chats[name].preview.visible
   }));
 
   const messageRef = useRef<HTMLDivElement | null>(null);
@@ -86,7 +86,7 @@ function WidgetLayout({
         width: naturalWidth,
         height: naturalHeight,
       };
-      dispatch(openFullscreenPreview(obj))
+      dispatch(openFullscreenPreview(obj,name))
     }
   }
 
@@ -107,8 +107,6 @@ function WidgetLayout({
   useEffect(() => {
     document.body.setAttribute('style', `overflow: ${visible || fullScreenMode ? 'hidden' : 'auto'}`)
   }, [fullScreenMode, visible])
-
-  console.log("-->>" +name + "<<--");
 
   return (
     <div
@@ -135,6 +133,7 @@ function WidgetLayout({
           onTextInputChange={onTextInputChange}
           sendButtonAlt={sendButtonAlt}
           showTimeStamp={showTimeStamp}
+          name={name}
         />
       }
       {customLauncher ?
@@ -145,10 +144,11 @@ function WidgetLayout({
           chatId={chatId}
           openLabel={launcherOpenLabel}
           closeLabel={launcherCloseLabel}
+          name={name}
         />
       }
       {
-        imagePreview && <FullScreenPreview fullScreenMode={fullScreenMode} zoomStep={zoomStep} />
+        imagePreview && <FullScreenPreview fullScreenMode={fullScreenMode} zoomStep={zoomStep} name={name}/>
       }
     </div>
   );

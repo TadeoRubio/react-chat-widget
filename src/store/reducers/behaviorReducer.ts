@@ -1,25 +1,48 @@
-import { createReducer } from '../../utils/createReducer';
-import { BehaviorState } from '../types';
+import { GlobalState } from '../types';
 
 import {
-  BehaviorActions,
   TOGGLE_CHAT,
   TOGGLE_INPUT_DISABLED,
   TOGGLE_MESSAGE_LOADER
 } from '../actions/types';
 
-const initialState = {
-  showChat: false,
-  disabledInput: false,
-  messageLoader: false
-};
 
 const behaviorReducer = {
-  [TOGGLE_CHAT]: (state: BehaviorState) => ({ ...state, showChat: !state.showChat}),
+  [TOGGLE_CHAT]: (state: GlobalState, {name}) => ({
+      ...state,
+        chats:{
+          ...state.chats, [name]:{
+            ...state.chats[name], behavior:{
+              ...state.chats[name].behavior, showChat: !state.chats[name].behavior.showChat
+            }
+          }
+        }
+     }
+  ),
 
-  [TOGGLE_INPUT_DISABLED]: (state: BehaviorState) => ({ ...state, disabledInput: !state.disabledInput }),
+  [TOGGLE_INPUT_DISABLED]: (state: GlobalState, {name}) => ({
+      ...state,
+        chats:{
+          ...state.chats, [name]:{
+            ...state.chats[name], behavior:{
+              ...state.chats[name].behavior, disabledInput: !state.chats[name].behavior.disabledInput
+            }
+          }
+        }
+     }
+  ),
 
-  [TOGGLE_MESSAGE_LOADER]: (state: BehaviorState) => ({ ...state, messageLoader: !state.messageLoader })
+  [TOGGLE_MESSAGE_LOADER]: (state: GlobalState, {name}) => ({
+      ...state,
+        chats:{
+          ...state.chats, [name]:{
+            ...state.chats[name], behavior:{
+              ...state.chats[name].behavior, messageLoader: !state.chats[name].behavior.messageLoader
+            }
+          }
+        }
+     }
+  )
 };
 
-export default (state: BehaviorState = initialState, action: BehaviorActions) => createReducer(behaviorReducer, state, action);
+export default behaviorReducer;

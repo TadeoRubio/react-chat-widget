@@ -15,10 +15,11 @@ const zoomOut = require('../../../../../assets/zoom-out.svg') as string;
 
 type Props = {
   fullScreenMode?: boolean;
-  zoomStep?: number
+  zoomStep?: number;
+  name: string
 }
 
-export default function FullScreenPreview({ fullScreenMode, zoomStep }:Props) {
+export default function FullScreenPreview({ fullScreenMode, zoomStep, name }:Props) {
   const {
     state,
     initFileSize,
@@ -29,11 +30,11 @@ export default function FullScreenPreview({ fullScreenMode, zoomStep }:Props) {
 
   const dispatch = useDispatch();
   const { src, alt, width, height, visible } = useSelector((state: GlobalState) => ({
-    src: state.preview.src,
-    alt: state.preview.alt,
-    width: state.preview.width,
-    height: state.preview.height,
-    visible: state.preview.visible
+    src: state.chats[name].preview.src,
+    alt: state.chats[name].preview.alt,
+    width: state.chats[name].preview.width,
+    height: state.chats[name].preview.height,
+    visible: state.chats[name].preview.visible
   }));
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function FullScreenPreview({ fullScreenMode, zoomStep }:Props) {
   const pDom = usePortal()
 
   const onClosePreview = () => {
-    dispatch(closeFullscreenPreview())
+    dispatch(closeFullscreenPreview(name))
   }
 
   const childNode: ReactNode = (

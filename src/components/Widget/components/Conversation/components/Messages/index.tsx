@@ -11,24 +11,25 @@ import './styles.scss';
 
 type Props = {
   showTimeStamp: boolean,
-  profileAvatar?: string;
+  profileAvatar?: string,
+  name: string,
 }
 
-function Messages({ profileAvatar, showTimeStamp }: Props) {
+function Messages({ profileAvatar, showTimeStamp, name }: Props) {
   const dispatch = useDispatch();
   const { messages, typing, showChat, badgeCount } = useSelector((state: GlobalState) => ({
-    messages: state.messages.messages,
-    badgeCount: state.messages.badgeCount,
-    typing: state.behavior.messageLoader,
-    showChat: state.behavior.showChat
+      messages: state.chats[name].messages.messages,
+      badgeCount: state.chats[name].messages.badgeCount,
+      typing: state.chats[name].behavior.messageLoader,
+      showChat: state.chats[name].behavior.showChat
   }));
 
   const messageRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     // @ts-ignore
     scrollToBottom(messageRef.current);
-    if (showChat && badgeCount) dispatch(markAllMessagesRead());
-    else dispatch(setBadgeCount(messages.filter((message) => message.unread).length));
+    if (showChat && badgeCount) dispatch(markAllMessagesRead(name));
+    else dispatch(setBadgeCount(messages.filter((message) => message.unread).length,name));
   }, [messages, badgeCount, showChat]);
     
   const getComponentToRender = (message: Message | Link | CustomCompMessage) => {

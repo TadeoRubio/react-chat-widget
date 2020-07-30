@@ -63,9 +63,14 @@ export interface FullscreenPreviewState extends ImageState {
   visible?: boolean;
 };
 
-export interface GlobalState {
+export interface ChatState {
+  name: string;
   messages: MessagesState;
   behavior: BehaviorState;
   quickButtons: QuickButtonsState;
   preview: FullscreenPreviewState;
+}
+
+export interface GlobalState {
+  chats: { [name:string]: ChatState; };
 }

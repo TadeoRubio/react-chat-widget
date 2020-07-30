@@ -12,3 +12,5 @@ export const MESSAGES_TYPES = {
 };
 
 export const MESSAGE_BOX_SCROLL_DURATION = 400;
+
+export const DEFAULT_CHAT_NAME = "chatwidget"

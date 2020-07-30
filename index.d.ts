@@ -6,11 +6,15 @@ import { ElementType } from 'react';
 
 declare const Widget: ElementType;
 
-export function addUserMessage(text: string): void;
-export function addUserMessage(text: string, id: string): void;
+export function getFirstOrDefaultChat(): string;
 
-export function addResponseMessage(text: string): void;
-export function addResponseMessage(text: string, id: string): void;
+export function addChat(name: string): void;
+
+export function addUserMessage(text: string, name?: string): void;
+export function addUserMessage(text: string, name: string, id: string): void;
+
+export function addResponseMessage(text: string, name?: string): void;
+export function addResponseMessage(text: string, name: string, id: string): void;
 
 export function addLinkSnippet(link: { link: string, title: string, target?: string }): void;
 export function addLinkSnippet(link: { link: string, title: string, target?: string }, id: string): void;
@@ -19,17 +23,17 @@ export function renderCustomComponent(component: ElementType, props: any): void;
 export function renderCustomComponent(component: ElementType, props: any, showAvatar: boolean): void;
 export function renderCustomComponent(component: ElementType, props: any, showAvatar: boolean, id: string): void;
 
-export function toggleMsgLoader(): void;
-export function toggleWidget(): void;
-export function toggleInputDisabled(): void;
-export function dropMessages(): void;
-export function isWidgetOpened(): boolean;
-export function setQuickButtons(buttons: Array<{ label: string, value: string | number }>): void;
+export function toggleMsgLoader(name?: string): void;
+export function toggleWidget(name?: string): void;
+export function toggleInputDisabled(name?: string): void;
+export function dropMessages(name?: string): void;
+export function isWidgetOpened(name?: string): boolean;
+export function setQuickButtons(buttons: Array<{ label: string, value: string | number }>, name?: string): void;
 
-export function deleteMessages(count: number): void;
-export function deleteMessages(count: number, id: string): void;
+export function deleteMessages(count: number, name?: string): void;
+export function deleteMessages(count: number, name: string, id: string): void;
 
-export function markAllAsRead(): void;
-export function setBadgeCount(count: number): void;
+export function markAllAsRead(name?: string): void;
+export function setBadgeCount(count: number, name?: string): void;
 
 export as namespace ReactChatWidget;

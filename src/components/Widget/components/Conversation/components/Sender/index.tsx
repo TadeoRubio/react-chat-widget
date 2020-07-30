@@ -14,10 +14,11 @@ type Props = {
   sendMessage: (event: any) => void;
   buttonAlt: string;
   onTextInputChange?: (event: any) => void;
+  name: string;
 }
 
-function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInputChange, buttonAlt }: Props) {
-  const showChat = useSelector((state: GlobalState) => state.behavior.showChat);
+function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInputChange, buttonAlt, name }: Props) {
+  const showChat = useSelector((state: GlobalState) => state.chats[name].behavior.showChat);
   const inputRef = useRef(null);
   // @ts-ignore
   useEffect(() => { if (showChat) inputRef.current?.focus(); }, [showChat]);

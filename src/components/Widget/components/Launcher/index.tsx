@@ -16,18 +16,19 @@ type Props = {
   chatId: string;
   openLabel: string;
   closeLabel: string;
+  name: string;
 }
 
-function Launcher({ toggle, chatId, openLabel, closeLabel }: Props) {
+function Launcher({ toggle, chatId, openLabel, closeLabel, name }: Props) {
   const dispatch = useDispatch();
   const { showChat, badgeCount } = useSelector((state: GlobalState) => ({
-    showChat: state.behavior.showChat,
-    badgeCount: state.messages.badgeCount
+    showChat: state.chats[name].behavior.showChat,
+    badgeCount: state.chats[name].messages.badgeCount
   }));
 
   const toggleChat = () => {
     toggle();
-    if (!showChat) dispatch(setBadgeCount(0));
+    if (!showChat) dispatch(setBadgeCount(0,name));
   }
 
   return (

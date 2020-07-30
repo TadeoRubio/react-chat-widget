@@ -7,6 +7,8 @@ import store from  './store';
 
 import { AnyFunction } from './utils/types';
 
+import { DEFAULT_CHAT_NAME } from './constants'
+
 type Props = {
   handleNewUserMessage: AnyFunction;
   handleQuickButtonClicked?: AnyFunction;
@@ -97,7 +99,7 @@ const defaultProps = {
   showTimeStamp: true,
   imagePreview: false,
   zoomStep: 80,
-  name: "chatwidget"
+  name: DEFAULT_CHAT_NAME
 };
 ConnectedWidget.defaultProps = defaultProps;
 
