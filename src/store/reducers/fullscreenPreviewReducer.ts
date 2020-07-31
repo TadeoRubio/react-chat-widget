@@ -14,10 +14,13 @@ const prevw = {
 };
 
 const fullscreenPreviewReducer = {
-  [OPEN_FULLSCREEN_PREVIEW]: (state: GlobalState, { payload, name }) => {
-    const { src, width, height } = payload
-    return {
-      ...state,
+  [OPEN_FULLSCREEN_PREVIEW]: (state: GlobalState, { payload, name }) =>  {
+    if (name === undefined ){
+      return state
+    }else{
+      const { src, width, height } = payload
+      return {
+        ...state,
         chats:{
           ...state.chats, [name]:{
             ...state.chats[name], preview:{
@@ -25,10 +28,11 @@ const fullscreenPreviewReducer = {
             }
           }
         }
-     }
+      }
+    }
   },
 
-  [CLOSE_FULLSCREEN_PREVIEW]: (state: GlobalState, {name}) => ({
+  [CLOSE_FULLSCREEN_PREVIEW]: (state: GlobalState, {name}) =>  name === undefined ? state : ({
     ...state,
       chats:{
         ...state.chats, [name]:{

@@ -3,7 +3,7 @@ import { SET_QUICK_BUTTONS } from '../actions/types';
 import { QuickButton, GlobalState } from '../types'
 
 const quickButtonsReducer = {
-  [SET_QUICK_BUTTONS]: (state: GlobalState, { buttons, name }) =>
+  [SET_QUICK_BUTTONS]: (state: GlobalState, { buttons, name }) => name === undefined ? state :
   ({
    ...state,
      chats:{

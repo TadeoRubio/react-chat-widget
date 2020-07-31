@@ -6,7 +6,7 @@ import {
 
 const globalReducer = {
   [ADD_CHAT]: (state: GlobalState, {name}) => {
-    if(name in state.chats){
+    if( name === undefined || name in state.chats){
       return state
     }
     else {

@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 
-import { Widget, addResponseMessage, setQuickButtons, toggleMsgLoader, addLinkSnippet, getFirstOrDefaultChat } from '../index';
+import { Widget, addResponseMessage, setQuickButtons, toggleMsgLoader, addLinkSnippet, getFirstOrDefaultChat, deleteMessages, dropMessages } from '../index';
 import { addUserMessage } from '..';
 
 export default class App extends Component {
+  
+  chat2: string = "second"
+
   componentDidMount() {
-    var chat2= "second"
-    var chatDef = getFirstOrDefaultChat();
-    console.log("My FirstOrDefault Chat:",chatDef)
-    addResponseMessage('Welcome to this awesome chat!',chat2);
-    addLinkSnippet({ link: 'https://google.com', title: 'Google' },chat2);
-    addResponseMessage('![](https://raw.githubusercontent.com/Wolox/press-kit/master/logos/logo_banner.png)',chat2);
-    addResponseMessage('![vertical](https://d2sofvawe08yqg.cloudfront.net/reintroducing-react/hero2x?1556470143)',chat2);
+    console.log("My FirstOrDefault Chat:", getFirstOrDefaultChat() );
+    addResponseMessage('Welcome to this awesome chat!',this.chat2);
+    addLinkSnippet({ link: 'https://google.com', title: 'Google' },this.chat2);
+    addResponseMessage('![](https://raw.githubusercontent.com/Wolox/press-kit/master/logos/logo_banner.png)',this.chat2);
+    addResponseMessage('![vertical](https://d2sofvawe08yqg.cloudfront.net/reintroducing-react/hero2x?1556470143)',this.chat2);
 
     addResponseMessage('Welcome to this super chat!');
     addLinkSnippet({ link: 'https://mail.google.com', title: 'Mail Google' });
@@ -44,10 +45,16 @@ export default class App extends Component {
     return true;
   }
 
+  btnTestClicked = (sender: any) => {
+    deleteMessages(1);
+    //dropMessages();
+  }
+
+
   render() {
     return (
       <div>
-        <button style={{position: 'absolute', right: 40, bottom: 150}}>test</button>
+        <button id="btnTest" style={{position: 'absolute', right: 40, bottom: 150}} onClick={this.btnTestClicked}>test</button>
         <Widget
           title="Hey Default Chat!"
           subtitle="Asistente virtual"
@@ -66,7 +73,7 @@ export default class App extends Component {
           handleQuickButtonClicked={this.handleQuickButtonClicked}
           imagePreview
           handleSubmit={this.handleSubmit}
-          name="second"
+          name={this.chat2}
         />
         
       </div>

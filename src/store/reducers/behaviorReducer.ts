@@ -8,7 +8,7 @@ import {
 
 
 const behaviorReducer = {
-  [TOGGLE_CHAT]: (state: GlobalState, {name}) => ({
+  [TOGGLE_CHAT]: (state: GlobalState, {name}) =>  name === undefined ? state : ({
       ...state,
         chats:{
           ...state.chats, [name]:{
@@ -20,7 +20,7 @@ const behaviorReducer = {
      }
   ),
 
-  [TOGGLE_INPUT_DISABLED]: (state: GlobalState, {name}) => ({
+  [TOGGLE_INPUT_DISABLED]: (state: GlobalState, {name}) =>  name === undefined ? state : ({
       ...state,
         chats:{
           ...state.chats, [name]:{
@@ -32,7 +32,7 @@ const behaviorReducer = {
      }
   ),
 
-  [TOGGLE_MESSAGE_LOADER]: (state: GlobalState, {name}) => ({
+  [TOGGLE_MESSAGE_LOADER]: (state: GlobalState, {name}) =>  name === undefined ? state : ({
       ...state,
         chats:{
           ...state.chats, [name]:{

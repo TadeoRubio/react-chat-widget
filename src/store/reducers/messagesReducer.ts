@@ -14,7 +14,7 @@ import {
 } from '../actions/types';
 
 const messagesReducer = {
-  [ADD_NEW_USER_MESSAGE]: (state: GlobalState, { text, name, id }) =>
+  [ADD_NEW_USER_MESSAGE]: (state: GlobalState, { text, name, id }) => name === undefined ? state :
     ({
       ...state,
       chats:{
@@ -26,7 +26,7 @@ const messagesReducer = {
       }
     }),
 
-  [ADD_NEW_RESPONSE_MESSAGE]: (state: GlobalState, { text, id, name}) => 
+  [ADD_NEW_RESPONSE_MESSAGE]: (state: GlobalState, { text, id, name}) => name === undefined ? state :
     ({
       ...state,
       chats:{
@@ -40,7 +40,7 @@ const messagesReducer = {
       }
     }),
 
-  [ADD_NEW_LINK_SNIPPET]: (state: GlobalState, { link, id, name }) =>
+  [ADD_NEW_LINK_SNIPPET]: (state: GlobalState, { link, id, name }) => name === undefined ? state :
     ({
       ...state,
       chats:{
@@ -53,7 +53,7 @@ const messagesReducer = {
       }
     }),
 
-  [ADD_COMPONENT_MESSAGE]: (state: GlobalState, { component, props, showAvatar, id, name }) =>
+  [ADD_COMPONENT_MESSAGE]: (state: GlobalState, { component, props, showAvatar, id, name }) => name === undefined ? state :
     ({
       ...state,
       chats:{
@@ -66,7 +66,7 @@ const messagesReducer = {
       }
     }),
 
-  [DROP_MESSAGES]: (state: GlobalState, { name }) => 
+  [DROP_MESSAGES]: (state: GlobalState, { name }) =>  name === undefined ? state :
     ({
       ...state,
       chats:{
@@ -79,9 +79,9 @@ const messagesReducer = {
       }
     }),
 
-  [HIDE_AVATAR]: (state: GlobalState, { index, name }) => state.chats[name].messages.messages[index].showAvatar = false,
+  [HIDE_AVATAR]: (state: GlobalState, { index, name }) =>  name === undefined ? state : state.chats[name].messages.messages[index].showAvatar = false,
 
-  [DELETE_MESSAGES]: (state: GlobalState, { count, id, name }) =>
+  [DELETE_MESSAGES]: (state: GlobalState, { count, id, name }) => name === undefined ? state :
     ({
       ...state,
       chats:{
@@ -90,13 +90,14 @@ const messagesReducer = {
             ...state.chats[name].messages, 
               messages: id ?
                 state.chats[name].messages.messages.filter(message => message.customId !== id) :
-                state.chats[name].messages.messages.splice(state.chats[name].messages.messages.length - 1, count) 
+                state.chats[name].messages.messages.splice(state.chats[name].messages.messages.length - 1, count),
+              badgeCount:  state.chats[name].messages.badgeCount < count ? state.chats[name].messages.badgeCount : count
           }
         }
       }
     }),
 
-  [SET_BADGE_COUNT]: (state: GlobalState, { count, name }) => 
+  [SET_BADGE_COUNT]: (state: GlobalState, { count, name }) =>  name === undefined ? state :
     ({
       ...state,
       chats:{
@@ -109,7 +110,7 @@ const messagesReducer = {
       }
     }),
 
-  [MARK_ALL_READ]: (state: GlobalState , { name }) =>
+  [MARK_ALL_READ]: (state: GlobalState , { name }) => name === undefined ? state :
     ({
       ...state,
       chats:{
